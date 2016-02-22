@@ -4,13 +4,16 @@ class unattended_upgrades::params {
   if $::osfamily != 'Debian' {
     fail('This module only works on Debian or derivatives like Ubuntu')
   }
-
+ 
   $default_auto                 = { 'fix_interrupted_dpkg' => true, 'remove' => true, 'reboot' => false, 'clean' => 0, }
   $default_mail                 = { 'only_on_error'        => true, }
   $default_backup               = { 'archive_interval'     => 0, 'level'     => 3, }
   $default_age                  = { 'min'                  => 2, 'max'       => 0, }
   $default_upgradeable_packages = { 'download_only'        => 0, 'debdelta'  => 1, }
-
+  $default_options              = { 'force_confdef'        => true,
+                                    'force_confold'        => true,
+                                    'force_confnew'        => false,
+                                    'force_confmiss'       => false, }
   # prior to puppet 3.5.0, defined couldn't test if a variable was defined
   # strict variables wasn't added until 3.5.0, so this should be fine.
   if ! $::settings::strict_variables {

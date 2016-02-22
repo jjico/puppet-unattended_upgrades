@@ -1,0 +1,7 @@
+Dpkg::Options {
+<%- @_options.each_pair do |config, value| 
+  if !!value == value and value then -%>
+  "--<%= config.sub('_','-') -%>";
+  <%- end -%>
+<%- end -%>
+}
